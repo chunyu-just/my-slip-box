@@ -55,7 +55,7 @@ p = &a;//p称为指针变量，它也是变量，它存的是赋值给它的变�
 
    可以看到指针操作内存的便捷。
 
-   ![](https://img-blog.csdnimg.cn/451428ac969345b3b9bcdc9dde845625.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+   
 
 5. 指针作为函数参数
 
@@ -84,7 +84,7 @@ p = &a;//p称为指针变量，它也是变量，它存的是赋值给它的变�
 
    我们同时打印了`a`在`main`函数和`Increment`函数中的地址，我们发现两者地址是不一样的，即两个函数中的`a`并不是同一个`a`，因此在`main`函数中的`a`并没有+1。
 
-   ![](https://img-blog.csdnimg.cn/07ce5d82932644bc811f2a7400c076b2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+   ![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144859640-42.png)
 
    如上图右侧，是一个**典型应用程序所使用的内存的分布**，包括了代码区、全局区、栈区、堆区（程序在开始运行时stack，static和code的大小就已经固定了）。（这里不详细介绍每个区的用处， 且图中栈和堆的位置与常识相颠倒）。如中间内存模型所示，函数中的变量（称为局部变量）是放在栈区的，如图中内存地址300-600的绿色框。首先调用`main`函数，系统将在栈区开辟一块内存（称为栈帧stack frame）存放`main`函数，并在`main `所属区域中找到一块内存给变量``a`，如`a = 10`；接着在`main`中调用了函数`Increment`，系统将在stack中继续为`Increment`函数开辟一块栈帧，并给其内部变量分配地址，接着复制一份`main`函数中的`a`到`Increment`函数中的`a`，因此我们将`Increment`函数中的`a`+1，并不影响在`main`函数中的`a`，因为两个`a`是分属于两个不同函数的两个不同的局部变量。
 
@@ -110,7 +110,7 @@ p = &a;//p称为指针变量，它也是变量，它存的是赋值给它的变�
 
    在该代码中将`main`函数中的`a`的地址传递给`Increment`函数中的变量`p`，通过解引用直接修改对应地址处（即`mian`函数中的`a`）的数值，达到目的。如下图中间部分内存模型所示：
 
-   ![](https://img-blog.csdnimg.cn/ce26004476244b3f86c3f592508021d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+   ![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144859641-43.png)
 
    将`a`的内存地址308传给`Increment`函数中的变量`p`，即变量`p`指向了`main`函数中的变量`a`，使用解引用即可达到修改`main`函数中的`a`的目的。这种通过将变量的指针传递给被调函数达到修改变量的传递方式称为按**指针传递**（视频中称为按引用传递，在C++中应该将其区分）。
 

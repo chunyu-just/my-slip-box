@@ -2,7 +2,7 @@
 
 笔者C++功底有限，如有错误，欢迎指正。
 
-reference：[pointer](C:\Users\chunyu\Desktop\pointer.md)
+reference：[pointer](pointer.md)
 
 第一节：指针基本介绍
 ----------
@@ -10,7 +10,7 @@ reference：[pointer](C:\Users\chunyu\Desktop\pointer.md)
 ### 变量在内存的存储
 
 如图中右侧图形表示计算机内存（memory），图形中每一个长条表示一个字节（byte），每一个字节存在对应的一个地址，如左侧0、201、202…209所标注。  
-![](https://img-blog.csdnimg.cn/5e498781d0a640e281e212c53ea95b11.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
 对于典型的现代计算机，1个`int`类型变量由4个字节表示，1个`char`类型变量由1个字节表示，1个float类型变量由4个字节表示。对于如下代码：
 
@@ -43,7 +43,7 @@ printf("%d\n", a);
 ```
 
 结合下图右侧内存模型。首先计算机分配内存地址204-207存储`a`，第二行定义变量`p`，变量`p`是一个 `int*`类型的变量，其内存地址为64-67（对于32位系统，使用4个字节表示一个内存地址），该变量存储了一个`int`类型变量的地址，随后`&a`表示获取了变量`a`的地址并赋值给变量`p`，即变量`p`中存储的值为变量`a`的地址204。  
-![](https://img-blog.csdnimg.cn/e1c16ee10b094c199614efe4f50fc6fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722087-1.png)
 
 因此，当我们打印`p`的值时输出为204，当打印`a`的地址`&a`时输出为204，当打印p的地址`&p`时输出为64，当打印变量`p`的[解引用](https://so.csdn.net/so/search?q=%E8%A7%A3%E5%BC%95%E7%94%A8&spm=1001.2101.3001.7020)`*p`时（解引用表示，取出变量`p`内存储的地址204所存储的变量`a`）输出为5，当对`*p`赋值为8后，即修改了变量`a`的值，此时打印`a`输出为8。
 
@@ -73,7 +73,7 @@ _笔者注_:这里能够初见看出为什么声明指针变量是有不同类�
 
 在本节开始视频作者介绍，虽然指针变量内存储的地址都是同一类型的，但是不同类型的指针表示其指向不同类型的变量，尤其是在使用解引用`*`时。
 
-![](https://img-blog.csdnimg.cn/11187cc8b9b7408a9b75c649038ba3e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722088-2.png)
 
 如上图所示，对于一个整型变量`a`（见图片右侧中间部分），当赋值1025时，其对应的四个字节200-203存储的二进制数字分别为00000000 00000000 00000100 00000001，如图中标注（小端，字幕标注为LSB）。考虑如下代码：
 
@@ -126,7 +126,7 @@ printf("%d\n", *(*(*r)));
 如上代码，可以定义指针的指针`int**`类型的变量`q`，以及指针的指针的指针`int***`类型的变量`r`，在使用时，只要逐层解引用即可。  
 其内存模型如下，我们可以更方便的查看变量里面所存储的数值。
 
-![](https://img-blog.csdnimg.cn/451428ac969345b3b9bcdc9dde845625.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722088-3.png)
 
 _笔者注_：本节`printf`的输出，不再解释。通过此节相信读者可以更强烈的感受到指针操作内存的便捷。
 
@@ -152,7 +152,7 @@ int main(){
 
 首先以上面代码为例解释函数按值传递。在`main`函数中，我们定义了变量`a`，并试图调用`Increment`函数使`a`增加1。但是当我们测试该代码时发现，`a`的值并没有如愿+1=11。我们同时打印了`a`在`main`函数和`Increment`函数中的地址，我们发现两者地址是不一样的，即两个函数中的`a`并不是同一个`a`，因此在`main`函数中的`a`并没有+1。
 
-![](https://img-blog.csdnimg.cn/07ce5d82932644bc811f2a7400c076b2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722088-4.png)
 
 视频作者接下来解释了为什么。如上图中，最右侧是一个典型应用程序所使用的内存的分布，包括了代码区、全局区、栈区、堆区（这里不详细介绍每个区的用处， 且图中栈和堆的位置与常识相颠倒）。如中间内存模型所示，函数中的变量（称为局部变量）是放在栈区的，如图中内存地址300-600的绿色框。首先调用`main`函数，系统将在栈区开辟一块内存（称为栈帧stack frame）存放`main`函数中的变量，如`a = 10`；接着在`main`中调用了函数`Increment`，系统将在“上面”继续开辟一块内存存放`Increment`函数中的变量，接着复制一份`main`函数中的`a`到`Increment`函数中的`a`，因此我们将`Increment`函数中的`a`+1，并不影响在`main`函数中的`a`，因为两个`a`是分属于两个不同函数的两个不同的局部变量。因此这种将一个函数中的变量（称为实参）通过复制的方式传递给被调函数的参数（称为形参），改变形参并不影响实参，这种传递方式称为**按值传递**。
 
@@ -177,7 +177,7 @@ int main(){
 
 在该代码中将`main`函数中的`a`的地址传递给`Increment`函数中的变量`p`，通过解引用直接修改对应地址处（即`mian`函数中的`a`）的数值，达到目的。如下图中间部分内存模型所示：
 
-![](https://img-blog.csdnimg.cn/ce26004476244b3f86c3f592508021d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722088-5.png)
 
 将`a`的内存地址308传给`Increment`函数中的变量`p`，即变量`p`指向了`main`函数中的变量`a`，使用解引用即可达到修改`main`函数中的`a`的目的。这种通过将变量的指针传递给被调函数达到修改变量的传递方式称为按**指针传递**（视频中称为按引用传递，在C++中应该将其区分）。
 
@@ -201,7 +201,7 @@ printf("%d\n", *(p + 2));
 
 参照如下图中的内存模型，在内存中数组`A[5]`中的五个`int`类型数值被连续放置在200-219地址中。当定义指针变量`p`并指向`A[0]`即数组的第一个元素的地址时，打印`p`则输出`A[0]`的地址200，打印`*p`则输出`A[0]`存储的数值2，打印`p+2`则输出`A[2]`的地址208，打印`*(p+2)`则输出`A[2]`存储的数值5。
 
-![](https://img-blog.csdnimg.cn/d71d5f2834e542b5b8ba3658e23a90d6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722089-6.png)
 
 如代码第二行所示，使用`int *p = A`同样可以得到数组`A`的地址，也即`A[0]`的地址。
 
@@ -250,7 +250,7 @@ int main(){
 
 我们设计了函数`SumOfElement`，函数计算数组内元素的和。对代码进行测试，输出`total`却是1而并不是想要得到的15。视频作者给出了如下解释。
 
-![](https://img-blog.csdnimg.cn/df8ac1bd04d84c49a5670f11ec1ea926.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722089-7.png)
 
 如上图所示。在内存模型中，`main`函数的栈帧中存放有数组`A[5]`以及变量`total`，在调用函数`SumOfElement`中，实际被传入的是数组`A[5]`第一个元素的指针，即在函数签名中的`int A[]`等价于`int *A`，即该种传参方式为指针传递而非按值传递，因此我们可以在被调函数中修改`main`函数中的数组`A[5]`。我们可以想象如果数组很大时，每次传参都整体复制一次是一种很大的浪费。
 
@@ -337,7 +337,7 @@ printf("%d\n", *(*B+1));
 ```
 
 首先二维数组在内存中的存储方式如下图所示，在内存中也是顺序存储的：  
-![](https://img-blog.csdnimg.cn/40fead55a31149fc96ee893f26835674.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722089-8.png)
 
 数组`B[2][3]`可以看作是由两个一维数组`B[0]`和`B[1]`组成，因此代码第二行的右值，可以看作是`B`的第一个元素的地址，但是请注意`B`的第一个元素是一个一维数组，因此数组指针的初始化如第二行所示。
 
@@ -368,7 +368,7 @@ printf("%d,%d,%d\n", *(C[1]+1), C[1][1], &C[1][1][0]);
 
 对于三维数组，实际上在内存中也是顺序存储的。如下图所示：
 
-![](https://img-blog.csdnimg.cn/dfc9c3ada93f4ac5867d9a68a81875f2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722090-9.png)
 
 可以认为数组`C`由`C[0]`、`C[1]`、`C[2]`三个二维数组组成，`C[0]`由`C[0][0]`和`C[0][1]`两个一维数组组成，以此类推。
 
@@ -400,7 +400,7 @@ int main(){
 
 本节视频作者简单介绍了栈和堆的使用和区别。如图所示：
 
-![](https://img-blog.csdnimg.cn/7e873c8c1d0d4c5a8b214766181cb5cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722090-10.png)
 
 对于图中左侧代码，在入口`main`函数中可以看到，程序后续依次调用了`SquaerOfSum`和`Square`函数，在内存模型中，函数的局部变量是放在栈区的，由系统自动管理内存申请和释放。对于该代码，在栈中依次压入`main`、`SquaerOfSum`、`Square`三个函数的栈帧，当函数执行完毕后反向依`Square`、`SquaerOfSum`、`main`释放掉，其表现与数据结构中的栈先进后出的规则是一致的（堆区则与数据结构中的堆是不一样的）。当栈帧过多或者局部变量过大时，由于栈区大小是在程序运行时就已经固定的，因此可能造成栈区使用耗尽，发生栈溢出(stack overflow)。
 
@@ -425,7 +425,7 @@ int main(){
 
 结合下图中内存模型，首先在栈中申请了变量`a`和变量`p`，使用`malloc`函数在堆区分配`sizeof(int)`数量字节的内存，因为`malloc`函数返回的指针类型是`void*`，需要强制转换为`int*`并赋值给`p`，（注意当无法申请到足够数量的内存时`malloc`函数将返回NULL，严格意义上需要判断），堆区内存需要手动释放，因此在`p`指向另一个地址前需要使用`free`函数释放掉。代码第九行在堆区申请了`20*sizeof(int)`字节的内存，即数组，我们可以通过`*p`、`p[0]`等数组的方式使用。
 
-![](https://img-blog.csdnimg.cn/a4cf7e1c7cc34892aea3bf0475a351fa.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722090-11.png)
 
 在C++中使用`new`和`delete`管理堆区内存，使用如下:
 
@@ -511,7 +511,7 @@ int main() {
 
 当运行该代码时，打印输出为6，将`main`函数中的`PrintHelloWorld`函数解注释时，打印输出不为6（因编译器不同，有可能也为6）.
 
-![](https://img-blog.csdnimg.cn/a02fe316ca804b149451da13f1c2102a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722091-12.png)
 
 接下来视频作者解释了这个现象。如上图所示，在`main`中有`a`，`b`，`ptr`三个变量，当调用`Add`函数时，将`main`函数中的`&a`，`&b`传给`Add`函数中的局部变量`a`，`b`，因此在`Add`函数中的`a`存储`main`函数中`a`的地址100，`Add`函数中的`b`存储`main`中的`b`的地址112，最后`Add`函数返回局部变量`c`的地址144，并清除`Add`函数栈帧。当在`main`函数打印输出内存地址为144中存储的数值时，我们要清除此时该内存已经被系统自动释放，此时去解引用时，存储的数值可能已经发生了变化，比如将第十四行代码`PrintHelloWorld`函数解注释，当调用`PrintHelloWorld`即创建该函数的栈帧，内存地址`144`内存储的数值很可能被函数`PrintHelloWorld`修改了。因此无法再次得到想要的结果。
 
@@ -539,7 +539,7 @@ _笔者注_：不要返回局部变量（栈区）的指针（地址）。
 ---------
 
 指针指向的是内存地址，而非必然是变量。指针也可以指向函数。  
-![](https://img-blog.csdnimg.cn/86d5bbe8a2954a259f76c0918720f964.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![](./image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAemhhc2h1bmcwMDE=,size_20,color_FFFFFF,t_70,g_se,x_16-1677144722091-13.png)
 
 何为函数指针？如上图所示，当写完源代码如program.c后，编译器（compiler）最终会把编译成program.exe的可执行文件，文件内容为二进制的机器码。程序在调用函数时，会跳转(call指令)至代码区函数所在的起始位置，并逐行执行函数的机器码。因此函数在内存模型中也可以认为有地址的。
 
