@@ -1,5 +1,13 @@
 ### 函数
 
+ipynb文件转md
+
+- jupyter nbconvert --to markdown file.ipynb 
+
+- ​                     ····html
+
+------
+
 为函数取名（为变量取名也一样）有些基本的注意事项：
 
 > - 首先，名称不能以数字开头。能用在名称开头的有，大小写字母和下划线 `_`；
@@ -228,7 +236,7 @@ str(3.12)  #                  -> 3.12
     - `str(i).zfill(3)` 将字符串转换成左侧由 `0` 填充的指定长度字符串。例如，这在批量生成文件名的时候就很有用
 - 格式化字符串
     - `format(*args, **kwargs)` 索引位置灵活 0 ，1位置可以呼唤
-        
+      
         ```python 
             '{0} is {1} years old.'.format(name, age)
         ```
@@ -447,15 +455,15 @@ while True:
 
 
     13
-
+    
     101
     102
     103
     104
     105
-
+    
     type
-
+    
     201
     202
     203
@@ -556,7 +564,7 @@ a_decorator(a_func)
 ```
 
     --------Hi, I'm a_func!
-
+    
     We can do sth. before a func is called...
     --------Hi, I'm a_func!
     ... and we can do sth. after it is called...
@@ -777,9 +785,9 @@ type(g.say_hi)
 
 
     <bound method Golem.say_hi of <__main__.Golem object at 0x0000028AB4202280>>
-
+    
     Hi!
-
+    
     __main__.Golem
 
 
@@ -856,14 +864,14 @@ rg.say_hi()
 
 
     <bound method Running_Golem.run of <__main__.Running_Golem object at 0x0000028AB44B69A0>>
-
+    
     Can't you see? I'm running...
-
+    
     'Clay'
 
 
     2023
-
+    
     Hi!
 
 
@@ -909,9 +917,9 @@ rg.say_hi()
 
 
     Can't you see? I'm running...
-
+    
     'Clay'
-
+    
     2023
 
 
@@ -1138,9 +1146,9 @@ g.population()
 
 
     <bound method Golem.population of <__main__.Golem object at 0x0000028AB5543460>>
-
+    
     ----------------------
-
+    
     1
 
 如果，你希望外部能够像获得 Class 的属性那样，直接写 `g.population`，而不是必须加上一个括号 `g.population()` 传递参数（实际上传递了一个隐含的 `self` 参数），那么可以在 `def population(self):` 之前的一行加上一句 `@property`：
@@ -1274,9 +1282,9 @@ g.population    # 所以，在很多的情况下，不把数据封装在 Class �
 
 
     1
-
+    
     101
-
+    
     101
 
 
@@ -1319,12 +1327,12 @@ g.population    # 所以，在很多的情况下，不把数据封装在 Class �
                   '__dict__': <attribute '__dict__' of 'Golem' objects>,
                   '__weakref__': <attribute '__weakref__' of 'Golem' objects>,
                   '__doc__': None})
-
+    
     {'name': 'Clay', 'built_year': 2023, '_Golem__active': True}
-
+    
     True
-
+    
     <property at 0x2445599cd10>
-
+    
     10000
 
